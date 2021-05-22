@@ -1,8 +1,28 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KernX.EventBus", "KernX.EventBus\KernX.EventBus.csproj", "{5F790D26-A5A7-4C77-A33C-86FEF14841BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KernX.EventBus.RabbitMQ", "KernX.EventBus.RabbitMQ\KernX.EventBus.RabbitMQ.csproj", "{7F49D462-6524-4FB5-A8EE-D8DEF5C9052C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{79E15ABC-3E94-49E5-A5E5-18DCCC22CD58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F790D26-A5A7-4C77-A33C-86FEF14841BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F790D26-A5A7-4C77-A33C-86FEF14841BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F790D26-A5A7-4C77-A33C-86FEF14841BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F790D26-A5A7-4C77-A33C-86FEF14841BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F49D462-6524-4FB5-A8EE-D8DEF5C9052C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F49D462-6524-4FB5-A8EE-D8DEF5C9052C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F49D462-6524-4FB5-A8EE-D8DEF5C9052C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F49D462-6524-4FB5-A8EE-D8DEF5C9052C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5F790D26-A5A7-4C77-A33C-86FEF14841BE} = {79E15ABC-3E94-49E5-A5E5-18DCCC22CD58}
+		{7F49D462-6524-4FB5-A8EE-D8DEF5C9052C} = {79E15ABC-3E94-49E5-A5E5-18DCCC22CD58}
 	EndGlobalSection
 EndGlobal
