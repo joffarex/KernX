@@ -9,10 +9,9 @@ namespace KernX.EventBus.RabbitMQ
 {
     public sealed class RabbitMQEventBus : IEventBus, IDisposable
     {
-        private readonly ILogger<RabbitMQEventBus> _logger;
-
         private readonly IConnection _connection;
         private readonly ConnectionFactory _connectionFactory;
+        private readonly ILogger<RabbitMQEventBus> _logger;
         private IModel _consumerChannel;
 
         public RabbitMQEventBus(ILogger<RabbitMQEventBus> logger, RabbitMQSettings settings)
@@ -37,10 +36,10 @@ namespace KernX.EventBus.RabbitMQ
 
         public void Publish<T>(string exchange, string appId, T @event) where T : IEvent
         {
-            using var channel = _connection.CreateModel();
+            using IModel channel = _connection.CreateModel();
 
-            var properties = GetMessageProperties(channel, appId);
-            var body = Encoding.UTF8.GetBytes(@event.Stringify());
+            IBasicProperties properties = GetMessageProperties(channel, appId);
+            byte[] body = Encoding.UTF8.GetBytes(@event.Stringify());
 
             channel.BasicPublish(exchange, string.Empty, properties, body);
             _logger.LogInformation($"Sent Message: {body}");
@@ -61,6 +60,18 @@ namespace KernX.EventBus.RabbitMQ
             Console.ReadLine();
         }
 
+        #region Helpers
+
+        private static IBasicProperties GetMessageProperties(IModel channel, string appId)
+        {
+            IBasicProperties properties = channel.CreateBasicProperties();
+            properties.Persistent = true;
+            properties.Headers = EventHeaders.ToDictionary(appId);
+            return properties;
+        }
+
+        #endregion
+
         #region Callbacks
 
         private void ReceivedCallbackException(object sender, CallbackExceptionEventArgs eventArgs)
@@ -80,18 +91,6 @@ namespace KernX.EventBus.RabbitMQ
             await callback(eventHeaders, parsedMessage);
 
             _consumerChannel.BasicAck(eventArgs.DeliveryTag, false);
-        }
-
-        #endregion
-
-        #region Helpers
-
-        private static IBasicProperties GetMessageProperties(IModel channel, string appId)
-        {
-            var properties = channel.CreateBasicProperties();
-            properties.Persistent = true;
-            properties.Headers = EventHeaders.ToDictionary(appId);
-            return properties;
         }
 
         #endregion

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KernX.EventBus
+﻿namespace KernX.EventBus
 {
     public interface IEvent
     {
