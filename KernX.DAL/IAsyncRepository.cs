@@ -11,11 +11,10 @@ namespace KernX.DAL
         Task<IEnumerable<T>> GetManyAsync(Expression<Func<T, bool>> filter);
         Task<T> GetByIdAsync(Guid id);
         Task<T> GetByConditionAsync(Expression<Func<T, bool>> filter);
-        Task AddAsync(T model);
-        Task UpdateAsync(T model);
-        Task UpdateByIdAsync(Guid id);
+        Task AddAsync(T entity);
+        Task UpdateAsync(T entity);
         Task BatchUpdateAsync(IEnumerable<T> entities);
-        Task RemoveAsync(T model);
+        Task RemoveAsync(T entity);
         Task RemoveByIdAsync(Guid id);
         Task BatchRemoveAsync(IEnumerable<T> entities);
     }
