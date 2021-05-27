@@ -34,18 +34,20 @@ namespace KernX.EventBus.RabbitMQ
             _connection.Dispose();
         }
 
-        public void Publish<T>(string exchange, string appId, T @event) where T : IEvent
+        public Task Publish<T>(string topic, string appId, T @event) where T : IEvent
         {
             using IModel channel = _connection.CreateModel();
 
             IBasicProperties properties = GetMessageProperties(channel, appId);
             byte[] body = Encoding.UTF8.GetBytes(@event.Stringify());
 
-            channel.BasicPublish(exchange, string.Empty, properties, body);
+            channel.BasicPublish(topic, string.Empty, properties, body);
             _logger.LogInformation($"Sent Message: {body}");
+            
+            return Task.CompletedTask;
         }
 
-        public void Subscribe<T>(string queueName, Func<EventHeaders, T, Task> callback)
+        public Task Subscribe<T>(string queue, Func<EventHeaders, T, Task> callback)
         {
             _consumerChannel = _connection.CreateModel();
 
@@ -55,9 +57,11 @@ namespace KernX.EventBus.RabbitMQ
             var consumer = new AsyncEventingBasicConsumer(_consumerChannel);
             consumer.Received += async (_, eventArgs) => { await ReceivedCallback(eventArgs, callback); };
 
-            _consumerChannel.BasicConsume(queueName, false, consumer);
+            _consumerChannel.BasicConsume(queue, false, consumer);
             _logger.LogInformation("Press [enter] to exit.");
             Console.ReadLine();
+            
+            return Task.CompletedTask;
         }
 
         #region Helpers
