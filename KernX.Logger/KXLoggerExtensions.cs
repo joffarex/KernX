@@ -5,13 +5,13 @@ namespace KernX.Logger
 {
     public static class KXLoggerExtensions
     {
-        // Make sure not to break in this function but one level higher during DEBUG
+        [DebuggerHidden]
         [Conditional("DEBUG")]
         public static void Assert<T>(this ILogger<T> logger, bool condition, string message)
         {
             if (!condition)
             {
-                logger.LogError("Assertion Failed: {Message}", message);
+                logger.LogError($"Assertion Failed: {message}");
                 if (Debugger.IsAttached)
                 {
                     logger.LogError(new StackTrace().ToString());
