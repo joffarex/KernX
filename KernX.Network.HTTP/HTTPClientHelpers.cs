@@ -25,6 +25,17 @@ namespace KernX.Network.HTTP
             return string.Empty;
         }
 
+        public static void AddHeaders(HttpClient httpClient, Dictionary<string, string> headers = null)
+        {
+            if (headers is not null)
+            {
+                foreach ((string key, string value) in headers)
+                {
+                    httpClient.DefaultRequestHeaders.Add(key, value);
+                }
+            }
+        }
+
         public static async Task<StringContent> GenerateRequestBody<T>(T body)
         {
             await using var memoryStream = new MemoryStream();
