@@ -10,22 +10,13 @@ Packages to add:
     - [ ] RabbitMQ           
     - [ ] Kafka
     - [ ] SQS/SNS/EventBridge
-    - [ ] NATS
-    - [ ] Azure Service Bus
 - [x] Logger
-- [ ] CQRS
 - [ ] Data Access Layer
     - [ ] Drivers
         - [x] MongoDB
-        - [ ] CassandraDB
         - [ ] DynamoDB
-        - [ ] PostgreSQL
-        - [ ] SQL Server
+        - [ ] PostgreSQL/SQL Server
     - [ ] Transactions
-- [ ] Metrics
-    - [ ] Analytics
-    - [ ] Tracing
-    - [ ] Prometheus
 - [ ] Security
     - [ ] Secrets
     - [ ] Environment management
@@ -35,7 +26,6 @@ Packages to add:
 - [ ] Network
     - [x] HTTP Client wrapper
     - [ ] gRPC wrapper
-    - [ ] TCP/UDP
 
 
 Packages that I really want to add but will need cleaver solution to do so:
@@ -43,11 +33,10 @@ Packages that I really want to add but will need cleaver solution to do so:
 - [ ] Event-Sourcing with snapshots
 - [ ] DDD
 
+
 Higher level abstractions:
 --------------------------
 - [ ] Framework
   Basically what MassTransit is
-- [ ] IaC (experimental)
-    - [ ] Terraform generator
 - [ ] Proxy
   AWS API Gateway/Nginx style
