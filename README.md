@@ -7,9 +7,15 @@ This are all the features I want to work on and have packaged with **KernX**:
 Packages to add:
 -----
 - [ ] EventBus
-    - [ ] RabbitMQ           
-    - [ ] Kafka
-    - [ ] SQS/SNS/EventBridge
+    - [ ] Providers
+        - [ ] RabbitMQ           
+        - [ ] Kafka
+        - [ ] SQS/SNS/EventBridge
+        - [ ] Kinesis
+    - [ ] Patterns
+        - [ ] Publish/Subscribe
+        - [ ] Request/Response
+- [ ] Sagas
 - [x] Logger
 - [ ] Data Access Layer
     - [ ] Drivers
