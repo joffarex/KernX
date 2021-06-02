@@ -38,7 +38,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KernX.Network.HTTP", "KernX
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KernX.EventBus.Kafka", "KernX.EventBus.Kafka\KernX.EventBus.Kafka.csproj", "{E1037A34-8C96-4ADC-9618-4CABFB0FD8D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KernX.FanoutSQS", "KernX.FanoutSQS\KernX.FanoutSQS.csproj", "{574FC55D-C8B2-464A-BFEB-5477ACF17D1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KernX.EventBus.FanoutSQS", "KernX.EventBus.FanoutSQS\KernX.EventBus.FanoutSQS.csproj", "{574FC55D-C8B2-464A-BFEB-5477ACF17D1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
