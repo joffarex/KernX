@@ -37,5 +37,17 @@ namespace KernX.EventBus
             MessageId = Encoding.UTF8.GetString((byte[]) headers[Headers.MessageId]),
             Timestamp = (long) headers[Headers.Timestamp]
         };
+
+        public static EventHeaders Create(IDictionary<string, string> headers) => new()
+        {
+            AppId = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(headers[Headers.AppId])),
+            ContentType = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(headers[Headers.ContentType])),
+            MessageId = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(headers[Headers.MessageId])),
+            Timestamp = long.Parse(headers[Headers.Timestamp])
+        };
+
+
+        public static List<string> GetNames => new()
+            {nameof(AppId), nameof(ContentType), nameof(MessageId), nameof(Timestamp)};
     }
 }
