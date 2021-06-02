@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Confluent.Kafka;
 using Microsoft.Extensions.Logging;
@@ -10,27 +9,33 @@ namespace KernX.EventBus.Kafka
 {
     public sealed class KafkaEventBus : IEventBus, IDisposable
     {
+        private readonly IConsumer<Null, string> _consumer;
         private readonly ILogger<KafkaEventBus> _logger;
 
         private readonly IProducer<Null, string> _producer;
-        private readonly IConsumer<Null, string> _consumer;
 
         public KafkaEventBus(ILogger<KafkaEventBus> logger, KafkaSettings settings)
         {
             _logger = logger;
             var connectionString = $"{settings.Host}:${settings.Port}";
 
-            var producerConfig = new ProducerConfig()
+            var producerConfig = new ProducerConfig
             {
-                BootstrapServers = connectionString,
+                BootstrapServers = connectionString
             };
             _producer = new ProducerBuilder<Null, string>(producerConfig).Build();
 
-            var consumerConfig = new ConsumerConfig()
+            var consumerConfig = new ConsumerConfig
             {
                 BootstrapServers = connectionString
             };
             _consumer = new ConsumerBuilder<Null, string>(consumerConfig).Build();
+        }
+
+        public void Dispose()
+        {
+            _producer.Dispose();
+            _consumer.Dispose();
         }
 
 
@@ -43,8 +48,8 @@ namespace KernX.EventBus.Kafka
             {
                 kafkaHeaders.Add(key, Encoding.UTF8.GetBytes(value.ToString() ?? string.Empty));
             }
-            
-            await _producer.ProduceAsync(topic, new Message<Null, string>()
+
+            await _producer.ProduceAsync(topic, new Message<Null, string>
             {
                 Value = @event.Stringify(),
                 Headers = kafkaHeaders
@@ -55,13 +60,6 @@ namespace KernX.EventBus.Kafka
 
         public async Task Subscribe<T>(string queue, Func<EventHeaders, T, Task> callback)
         {
-            
-        }
-
-        public void Dispose()
-        {
-            _producer.Dispose();
-            _consumer.Dispose();
         }
     }
 }

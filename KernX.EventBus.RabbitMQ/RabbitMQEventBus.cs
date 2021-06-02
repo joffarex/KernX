@@ -43,7 +43,7 @@ namespace KernX.EventBus.RabbitMQ
 
             channel.BasicPublish(topic, string.Empty, properties, body);
             _logger.LogInformation($"Sent Message: {body}");
-            
+
             return Task.CompletedTask;
         }
 
@@ -60,7 +60,7 @@ namespace KernX.EventBus.RabbitMQ
             _consumerChannel.BasicConsume(queue, false, consumer);
             _logger.LogInformation("Press [enter] to exit.");
             Console.ReadLine();
-            
+
             return Task.CompletedTask;
         }
 
