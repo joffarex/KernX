@@ -8,9 +8,10 @@ Packages to add:
 -----
 - [ ] EventBus
     - [ ] Providers
-        - [ ] RabbitMQ           
+        - [x] RabbitMQ           
         - [ ] Kafka
-        - [ ] SQS/SNS/EventBridge
+        - [x] SQS/SNS
+        - [ ] EventBridge
         - [ ] Kinesis
     - [ ] Patterns
         - [ ] Publish/Subscribe
