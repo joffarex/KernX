@@ -44,6 +44,7 @@ Packages that I really want to add but will need cleaver solution to do so:
 Higher level abstractions:
 --------------------------
 - [ ] Framework
-  Basically what MassTransit is
+  - Basically what MassTransit is
+  - Think how you could use Attributes to mark some of the functionality (e.g. publisher/consumer)
 - [ ] Proxy
   AWS API Gateway/Nginx style
